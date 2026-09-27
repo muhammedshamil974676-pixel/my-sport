@@ -1,0 +1,145 @@
+.navbar-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.navbar-brand-btn {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 8px 2px;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.nav-btn:hover {
+  color: var(--primary-green);
+}
+
+.nav-btn.active {
+  color: var(--primary-green);
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-green);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-subtle);
+  color: var(--black);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.cart-btn:hover,
+.cart-btn.active {
+  background-color: var(--primary-green-light);
+  color: var(--primary-green);
+}
+
+.cart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background-color: var(--primary-green);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+}
+
+.mobile-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  color: var(--black);
+}
+
+.mobile-nav-drawer {
+  display: none;
+  background-color: var(--white);
+  border-top: 1px solid var(--border-light);
+  padding: 16px 0;
+}
+
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-btn {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+}
+
+.mobile-nav-btn:hover,
+.mobile-nav-btn.active {
+  background-color: var(--primary-green-light);
+  color: var(--primary-green);
+}
+
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-toggle-btn {
+    display: flex;
+  }
+
+  .mobile-nav-drawer {
+    display: block;
+  }
+}
