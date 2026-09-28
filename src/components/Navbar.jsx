@@ -9,6 +9,7 @@ export default function Navbar() {
 
   const handleNavClick = (view, category = null) => {
     setMobileMenuOpen(false);
+
     if (category) {
       navigateTo('shop', { category });
     } else {
@@ -38,6 +39,7 @@ export default function Navbar() {
           >
             Home
           </button>
+
           <button
             type="button"
             className={`nav-btn ${currentView === 'shop' && selectedCategory === 'all' ? 'active' : ''}`}
@@ -45,6 +47,7 @@ export default function Navbar() {
           >
             Shop
           </button>
+
           <button
             type="button"
             className={`nav-btn ${currentView === 'shop' && selectedCategory === 'shoes' ? 'active' : ''}`}
@@ -52,6 +55,7 @@ export default function Navbar() {
           >
             Football Shoes
           </button>
+
           <button
             type="button"
             className={`nav-btn ${currentView === 'shop' && selectedCategory === 'socks' ? 'active' : ''}`}
@@ -59,12 +63,22 @@ export default function Navbar() {
           >
             Socks
           </button>
+
           <button
             type="button"
             className={`nav-btn ${currentView === 'shop' && selectedCategory === 'shinpads' ? 'active' : ''}`}
             onClick={() => handleNavClick('shop', 'shinpads')}
           >
             Shin Pads
+          </button>
+
+          {/* Admin */}
+          <button
+            type="button"
+            className={`nav-btn ${currentView === 'admin-login' ? 'active' : ''}`}
+            onClick={() => handleNavClick('admin-login')}
+          >
+            Admin
           </button>
         </nav>
 
@@ -76,11 +90,19 @@ export default function Navbar() {
             onClick={() => handleNavClick('cart')}
             aria-label={`View Cart, ${totalCartCount} items`}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
+
             <span className="cart-text">Cart</span>
             <span className="cart-badge">{totalCartCount}</span>
           </button>
@@ -93,12 +115,26 @@ export default function Navbar() {
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -119,6 +155,7 @@ export default function Navbar() {
             >
               Home
             </button>
+
             <button
               type="button"
               className={`mobile-nav-btn ${currentView === 'shop' && selectedCategory === 'all' ? 'active' : ''}`}
@@ -126,6 +163,7 @@ export default function Navbar() {
             >
               Shop All
             </button>
+
             <button
               type="button"
               className={`mobile-nav-btn ${currentView === 'shop' && selectedCategory === 'shoes' ? 'active' : ''}`}
@@ -133,6 +171,7 @@ export default function Navbar() {
             >
               Football Shoes
             </button>
+
             <button
               type="button"
               className={`mobile-nav-btn ${currentView === 'shop' && selectedCategory === 'socks' ? 'active' : ''}`}
@@ -140,6 +179,7 @@ export default function Navbar() {
             >
               Socks
             </button>
+
             <button
               type="button"
               className={`mobile-nav-btn ${currentView === 'shop' && selectedCategory === 'shinpads' ? 'active' : ''}`}
@@ -147,12 +187,22 @@ export default function Navbar() {
             >
               Shin Pads
             </button>
+
             <button
               type="button"
               className={`mobile-nav-btn ${currentView === 'cart' ? 'active' : ''}`}
               onClick={() => handleNavClick('cart')}
             >
               Cart ({totalCartCount})
+            </button>
+
+            {/* Admin - Mobile */}
+            <button
+              type="button"
+              className={`mobile-nav-btn ${currentView === 'admin-login' ? 'active' : ''}`}
+              onClick={() => handleNavClick('admin-login')}
+            >
+              Admin
             </button>
           </div>
         </div>
