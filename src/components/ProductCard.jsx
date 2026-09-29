@@ -53,7 +53,7 @@ export default function ProductCard({ product }) {
         </h3>
 
         <div className="product-price-row">
-          <span className="product-price">${product.price.toFixed(2)}</span>
+          <span className="product-price">₹{product.price.toFixed(2)}</span>
         </div>
 
         {/* Buttons: Add to Cart and View Product */}

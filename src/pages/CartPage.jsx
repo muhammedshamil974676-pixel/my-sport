@@ -75,7 +75,7 @@ export default function CartPage() {
                         {item.selectedSize && <span>Size: <strong>{item.selectedSize}</strong></span>}
                         {item.selectedColor && <span>Color: <strong>{item.selectedColor}</strong></span>}
                       </div>
-                      <span className="item-unit-price">${item.price.toFixed(2)} each</span>
+                      <span className="item-unit-price">₹{item.price.toFixed(2)} each</span>
                     </div>
                   </div>
 
@@ -115,7 +115,7 @@ export default function CartPage() {
                     {/* Line Total */}
                     <div className="item-total-cell">
                       <span className="line-total-price">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -140,7 +140,7 @@ export default function CartPage() {
 
             <div className="summary-row">
               <span className="summary-label">Subtotal</span>
-              <span className="summary-val">${subtotal.toFixed(2)}</span>
+              <span className="summary-val">₹{subtotal.toFixed(2)}</span>
             </div>
 
             <div className="summary-row">
@@ -152,7 +152,7 @@ export default function CartPage() {
 
             <div className="summary-row total-row">
               <span className="total-label">Total</span>
-              <span className="total-val">${total.toFixed(2)}</span>
+              <span className="total-val">₹{total.toFixed(2)}</span>
             </div>
 
             <button

@@ -287,7 +287,7 @@ export default function CheckoutPage() {
                       </div>
 
                       <span className="ordered-item-price">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
@@ -744,14 +744,14 @@ export default function CheckoutPage() {
                         </span>
 
                         <span className="unit-price">
-                          ${item.price.toFixed(2)} each
+                          ₹{item.price.toFixed(2)} each
                         </span>
                       </div>
 
                     </div>
 
                     <span className="summary-line-total">
-                      $
+                      ₹
                       {(item.price * item.quantity).toFixed(2)}
                     </span>
                   </div>

@@ -6,6 +6,37 @@ const ShopContext = createContext(null);
 
 const CART_STORAGE_KEY = 'mysport_cart_items';
 
+// Safely convert Supabase JSON/text fields into arrays
+function parseArray(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (!value) {
+    return [];
+  }
+
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+
+      return [];
+    } catch (error) {
+      // If the value is a simple comma-separated string
+      return value
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+  }
+
+  return [];
+}
+
 export function ShopProvider({ children }) {
   // Navigation: 'home' | 'shop' | 'product' | 'cart'
   const [currentView, setCurrentView] = useState('home');
@@ -43,49 +74,62 @@ export function ShopProvider({ children }) {
       setProductsLoading(true);
       setProductsError(null);
 
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .order('id', { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('id', { ascending: true });
 
-      if (error) {
-        console.error('Failed to load products:', error);
+        if (error) {
+          console.error('Failed to load products:', error);
+          setProductsError(error.message);
+          setProductsLoading(false);
+          return;
+        }
+
+        if (!data) {
+          setProducts([]);
+          setProductsLoading(false);
+          return;
+        }
+
+        const mappedProducts = data.map((product) => {
+          const additionalImages = parseArray(product.additional_images);
+          const sizes = parseArray(product.sizes);
+          const colors = parseArray(product.colors);
+
+          return {
+            ...product,
+
+            // Convert Supabase field names to frontend field names
+            categoryName:
+              product.category_name || product.category || '',
+
+            isFeatured:
+              product.is_featured === true,
+
+            // Convert JSON/text fields safely into arrays
+            additionalImages,
+
+            sizes,
+
+            availableSizes: sizes,
+
+            colors,
+
+            availableColors: colors
+          };
+        });
+
+        console.log('Products loaded from Supabase:', mappedProducts);
+
+        setProducts(mappedProducts);
+      } catch (error) {
+        console.error('Unexpected error loading products:', error);
         setProductsError(error.message);
+      } finally {
         setProductsLoading(false);
-        return;
       }
-
-      const mappedProducts = data.map((product) => ({
-        ...product,
-
-        // Convert Supabase field names to existing frontend field names
-        categoryName: product.category_name,
-        isFeatured: product.is_featured,
-
-        // Convert JSON text back into arrays
-        additionalImages: JSON.parse(
-          product.additional_images || '[]'
-        ),
-
-        sizes: JSON.parse(
-          product.sizes || '[]'
-        ),
-
-        availableSizes: JSON.parse(
-          product.sizes || '[]'
-        ),
-
-        colors: JSON.parse(
-          product.colors || '[]'
-        ),
-
-        availableColors: JSON.parse(
-          product.colors || '[]'
-        )
-      }));
-
-      setProducts(mappedProducts);
-      setProductsLoading(false);
     }
 
     loadProducts();
@@ -236,7 +280,7 @@ export function ShopProvider({ children }) {
   // Cart calculations
   const subtotal = cart.reduce(
     (sum, item) =>
-      sum + item.price * item.quantity,
+      sum + Number(item.price || 0) * item.quantity,
     0
   );
 

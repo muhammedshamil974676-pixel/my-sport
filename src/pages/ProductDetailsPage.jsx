@@ -105,7 +105,7 @@ export default function ProductDetailsPage() {
             <h1 className="details-title">{product.name}</h1>
 
             <div className="price-tag-row">
-              <span className="details-price">${product.price.toFixed(2)}</span>
+              <span className="details-price">₹{product.price.toFixed(2)}</span>
             </div>
 
             <p className="details-description">{product.description}</p>
